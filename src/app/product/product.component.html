@@ -1,15 +1,17 @@
 <!-- <p>product works!</p> -->
 <section class="products">
-    <div class="product-card" *ngFor="let product of product">
-      <div class="product-image">
-        <img [src]="product.image" alt="{{ product.title }}">
-      </div>
-      <div class="product-details">
-        <h2>{{ product.title }}</h2>
-        <p>{{ product.description }}</p>
-        <span class="price">$ {{ product.price }}</span>
+  <div class="product-card" *ngFor="let product of product">
+    <div class="product-image">
+      <img [src]="product.image" alt="{{ product.title }}">
+    </div>
+    <div class="product-details">
+      <div class="product-title">{{ product.title }}</div>
+
+      <div class="price-button">
+        <div class="price">$ {{ product.price }}</div>
         <button>Add to Cart</button>
       </div>
+
     </div>
-  </section>
-  
+  </div>
+</section>
