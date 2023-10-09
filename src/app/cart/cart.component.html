@@ -1,7 +1,7 @@
-<p>cart works!</p>
-<!-- cart.component.html -->
-<h2>Shopping Cart</h2>
 <div *ngFor="let product of cart">
-  <h3>{{ product.name }}</h3>
+  <h3>{{ product.title }}</h3>
   <p>Price: {{ product.price }}</p>
+</div>
+<div class = "empty-cart-dialogue">
+  <h2>Your Cart is empty</h2>
 </div>

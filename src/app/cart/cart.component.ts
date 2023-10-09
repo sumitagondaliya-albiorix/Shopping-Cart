@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CartService, Product } from './cart.service';
-
+import { CartService } from '../Service/cart.service';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
   cart: Product[] = [];
@@ -14,5 +14,3 @@ export class CartComponent {
     this.cart = this.cartService.getCart();
   }
 }
-
-
