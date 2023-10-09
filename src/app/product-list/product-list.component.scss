@@ -1,12 +1,3 @@
-// .product {
-//   display: flex;
-//   background-color: #ddd;
-//   justify-content: center;
-//   padding: 20px;
-//   flex-direction: column;
-//   width: 500px;
-// }
-
 .product-card {
   width: 300px;
   background-color: #fff;
@@ -76,4 +67,10 @@ button:hover {
   justify-content: center;
   flex-wrap: wrap;
   align-items: stretch;
+}
+.btn-add-to-cart {
+  margin: 20px;
+  padding-bottom: 20px;
+  bottom: 0%;
+  height: auto;
 }
