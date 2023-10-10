@@ -9,7 +9,7 @@ import { Product } from '../models/product.model';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = [];
+  products: any[] = [];
 
   constructor(
     private productService: ProductService,
@@ -24,7 +24,9 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
+  addToCart(product: any) {
+    this.cartService.addItem(product);
   }
 }
+  
+

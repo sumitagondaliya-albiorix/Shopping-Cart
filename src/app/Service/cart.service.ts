@@ -5,13 +5,31 @@ import { Product } from '../models/product.model';
   providedIn: 'root',
 })
 export class CartService {
-  private cart: Product[] = [];
+  cartItems: any[] = [];
+  // cart: Product[];
+  //  cart: Product[];
 
-  addToCart(product: Product) {
-    this.cart.push(product);
+  constructor() { 
+    
   }
 
-  getCart(): Product[] {
-    return this.cart;
+  addItem(item: any) {
+    this.cartItems.push(item);
+  }
+
+  removeItem(index: number) {
+    this.cartItems.splice(index, 1);
+  }
+
+  // getCart(): Product[] {
+  //   return this.cart;
+  // }
+
+  getCartItemCount(): number {
+    return this.cartItems.length;
+  }
+
+  getTotalAmount(): number {
+    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 }

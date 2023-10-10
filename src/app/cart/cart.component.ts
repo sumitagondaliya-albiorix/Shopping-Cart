@@ -9,8 +9,31 @@ import { Product } from '../models/product.model';
 })
 export class CartComponent {
   cart: Product[] = [];
+  totalAmount: number = 0;
+  cartItems:any;
 
   constructor(private cartService: CartService) {
-    this.cart = this.cartService.getCart();
+    this.cartItems = this.cartService.cartItems;
+    this.calculateTotalAmount();
+  }
+  calculateTotalAmount() {
+    this.totalAmount = this.cartService.getTotalAmount();
+  }
+
+  removeItem(index: number) {
+    this.cartService.removeItem(index);
+    this.calculateTotalAmount();
+  }
+
+  incrementQuantity(item: any) {
+    item.quantity++;
+    this.calculateTotalAmount();
+  }
+
+  decrementQuantity(item: any) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.calculateTotalAmount();
+    }
   }
 }

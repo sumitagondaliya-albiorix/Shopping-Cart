@@ -15,3 +15,19 @@
     font-weight: bold;
   }
 }
+.cart-icon {
+  text-decoration: none;
+  color: #333;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(61, 24, 224);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
