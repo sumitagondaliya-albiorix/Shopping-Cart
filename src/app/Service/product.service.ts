@@ -8,6 +8,6 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   loadProducts(): any {
-    return this.http.get('https://fakestoreapi.com/products');
+    return this.http.get('https://dummyjson.com/products');
   }
 }

@@ -9,7 +9,7 @@ import { Product } from '../models/product.model';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
 
   constructor(
     private productService: ProductService,
@@ -17,16 +17,21 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.products = this.productService.loadProducts();
-    this.productService.loadProducts().subscribe((response: Product[]) => {
-      this.products = response;
-      console.log('this.products: ', this.products);
-    });
+    this.getProducts();
   }
 
+  getProducts() {
+    this.productService.loadProducts().subscribe((response: any) => {
+      this.products = response.products;
+      console.log(this.products);
+      this.products.forEach((item: any) => {
+        item.quantity = 0;
+      });
+      
+      
+    });
+  }
   addToCart(product: any) {
     this.cartService.addItem(product);
   }
 }
-  
-

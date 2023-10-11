@@ -10,7 +10,7 @@ import { Product } from '../models/product.model';
 export class CartComponent {
   cart: Product[] = [];
   totalAmount: number = 0;
-  cartItems:any;
+  cartItems: any;
 
   constructor(private cartService: CartService) {
     this.cartItems = this.cartService.cartItems;
@@ -27,13 +27,20 @@ export class CartComponent {
 
   incrementQuantity(item: any) {
     item.quantity++;
+    this.updateCartItems(item);
     this.calculateTotalAmount();
   }
 
   decrementQuantity(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
+      this.updateCartItems(item);
       this.calculateTotalAmount();
     }
+  }
+
+  updateCartItems(item: any) {
+    const index = this.cartItems.findIndex((i: any) => i === item);
+    this.cartItems[index] = item;
   }
 }
