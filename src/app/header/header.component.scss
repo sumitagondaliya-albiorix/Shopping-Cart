@@ -17,11 +17,18 @@
 }
 .cart-icon {
   text-decoration: none;
-  color: #333;
+  color: #f3ebeb;
+  position: relative;
+  margin-right: 30px;
+}
+
+.cart-icon a {
+  text-decoration: none;
+  color: #fff;
+  size: 5cm;
 }
 
 .badge {
-  position: absolute;
   top: 0;
   right: 0;
   background-color: rgb(61, 24, 224);
@@ -30,4 +37,3 @@
   border-radius: 50%;
   font-size: 12px;
 }
-

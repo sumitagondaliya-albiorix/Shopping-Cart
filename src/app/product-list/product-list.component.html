@@ -1,3 +1,4 @@
+<div class="product-box">
 <section class="products">
   <div class="product-card" *ngFor="let product of products" class="product">
     <div class="product-image">
@@ -6,16 +7,17 @@
     <div class="btn-add-to-cart">
       <div>
         <div class="product-details">
-          <div style="height: 150px;">
+          <div style="height: 60px;">
             <span class="product-title">{{ product.title }}</span>
           </div>
 
-          <div class="price-button" style="margin-top: 10px;">
+          <div class="price-button">
             <span class="price">${{ product.price }}</span>
           </div>
-          <button (click)="addToCart(product)">Add to Cart</button>
+          <button (click)="addToCart(product)" style="margin-top: 20px;">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+</div>

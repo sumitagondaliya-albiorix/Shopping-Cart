@@ -7,9 +7,14 @@ import { CartService } from '../Service/cart.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  cartItemCount: number = 0;
+  cartItemCount: any = 1;
   constructor(private cartService: CartService) {
     this.cartItemCount = this.cartService.getCartItemCount();
   }
-}
 
+  ngOnInit(): any {
+    this.cartService.getCartItemCount().subscribe((response: any) => {
+      this.cartItemCount = response;
+    });
+  }
+}

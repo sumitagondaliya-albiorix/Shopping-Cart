@@ -16,9 +16,15 @@ export class CartComponent {
     this.cartItems = this.cartService.cartItems;
     this.calculateTotalAmount();
   }
-  calculateTotalAmount() {
+  calculateTotalAmount():void {
     this.totalAmount = this.cartService.getTotalAmount();
+    // return "sumita";// apply a return type for security purpose
   }
+
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
+  }
+  
 
   removeItem(index: number) {
     this.cartService.removeItem(index);
