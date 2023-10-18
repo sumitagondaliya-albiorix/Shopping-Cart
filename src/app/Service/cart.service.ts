@@ -7,6 +7,7 @@ import { Product } from '../models/product.model';
 export class CartService {
   cartItems: Product[] = [];
   addToCart: any;
+  products: any;
   constructor() {}
 
   addItem(item: any) {
@@ -23,6 +24,9 @@ export class CartService {
   getTotalAmount(): number {
     console.log('this.cartItems: ', this.cartItems);
     return this.cartItems.reduce(
-      (total, item) => total + item.price * item.quantity, 0);
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 }

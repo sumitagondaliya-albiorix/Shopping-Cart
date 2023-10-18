@@ -13,40 +13,43 @@ export class CartComponent {
   cartItems: any;
 
   constructor(private cartService: CartService) {
-    this.cartItems = this.cartService.cartItems;
     this.calculateTotalAmount();
+    this.fetchCart();
   }
-  calculateTotalAmount():void {
+  calculateTotalAmount(): void {
     this.totalAmount = this.cartService.getTotalAmount();
-    // return "sumita";// apply a return type for security purpose
   }
-
-  addToCart(product: any) {
-    this.cartService.addToCart(product);
-  }
-  
-
-  removeItem(index: number) {
-    this.cartService.removeItem(index);
+  removeItem(item: any) {
+    item.quantity = 0;
+    this.updateCartItems(item);
     this.calculateTotalAmount();
+    this.fetchCart();
   }
 
   incrementQuantity(item: any) {
     item.quantity++;
     this.updateCartItems(item);
     this.calculateTotalAmount();
+    this.fetchCart();
   }
 
   decrementQuantity(item: any) {
-    if (item.quantity > 1) {
+    if (item.quantity > 0) {
       item.quantity--;
       this.updateCartItems(item);
       this.calculateTotalAmount();
     }
+    this.fetchCart();
   }
 
   updateCartItems(item: any) {
-    const index = this.cartItems.findIndex((i: any) => i === item);
+    debugger;
+    const index = this.cartItems.findIndex((i: any) => i.id === item.id);
     this.cartItems[index] = item;
+    localStorage.setItem('products', JSON.stringify(this.cartItems));
+  }
+
+  fetchCart() {
+    this.cartItems = JSON.parse(localStorage.getItem('products') || '[]');
   }
 }
