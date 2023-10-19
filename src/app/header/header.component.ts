@@ -8,8 +8,8 @@ import { CartService } from '../Service/cart.service';
 })
 export class HeaderComponent {
   cartItemCount: any = 1;
-  constructor(private cartService: CartService) {
-    this.cartItemCount = this.cartService.getCartItemCount();
+  constructor(public cartService: CartService) {
+    // this.cartItemCount = this.cartService.getCartItemCount();
   }
 
   ngOnInit(): any {

@@ -48,9 +48,7 @@
 button {
   background-color: #333;
   color: #fff;
- 
   cursor: pointer;
-  
   border-radius: 15px 15px;
   padding: 6px;
 }
@@ -60,7 +58,7 @@ button:hover {
 }
 
 .product {
-  border: 4px  #706969;
+  border: 4px #706969;
   padding: 10px;
   border-radius: 20px 20px;
   box-shadow: 10px 10px 5px rgb(144, 155, 160);
@@ -69,7 +67,7 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: 40px;
-  background: beige;
+  background: white;
   padding: 10px;
   grid-column-gap: 20px;
   grid-row-gap: 20px;

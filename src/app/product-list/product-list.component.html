@@ -10,15 +10,16 @@
             <div style="height: 60px;">
               <span class="product-title">{{ product.title }}</span>
             </div>
-
             <div class="price-button">
-              <span class="price">${{ product.price }}</span>
+              <span class="price">${{product.price}}</span>
             </div>
             <button *ngIf="!product.quantity" (click)="addToCart(product)" style="margin-top: 20px;">Add to
               Cart</button>
-            <button *ngIf="product.quantity" (click)="IncDec(false,product)" style="margin-top: 20px;">-</button>
-            <!-- <span *ngIf="product.quantity"></span> -->
-            <button *ngIf="product.quantity" (click)="IncDec(true,product)" style="margin-top: 20px;">+</button>
+            <span *ngIf="product.quantity">
+              <button *ngIf="product.quantity" (click)="IncDec(false,product)" style="margin-top: 20px;">-</button>
+              <span  style="padding: 10px" >{{ product.quantity }}</span>
+              <button *ngIf="product.quantity" (click)="IncDec(true,product)" style="margin-top: 20px;">+</button>
+            </span>
           </div>
         </div>
       </div>

@@ -8,48 +8,26 @@ import { Product } from '../models/product.model';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-  cart: Product[] = [];
-  totalAmount: number = 0;
-  cartItems: any;
+  totalAmount = 0;
 
-  constructor(private cartService: CartService) {
-    this.calculateTotalAmount();
-    this.fetchCart();
-  }
-  calculateTotalAmount(): void {
-    this.totalAmount = this.cartService.getTotalAmount();
-  }
-  removeItem(item: any) {
-    item.quantity = 0;
-    this.updateCartItems(item);
-    this.calculateTotalAmount();
-    this.fetchCart();
+  cartItems: Product[]= [];
+
+  constructor(public cartService: CartService) {
+    this.cartItems = this.cartService.cartItems;
   }
 
-  incrementQuantity(item: any) {
-    item.quantity++;
-    this.updateCartItems(item);
-    this.calculateTotalAmount();
-    this.fetchCart();
+  removeItem(index: number) {
+    this.cartItems.splice(index, 1);
   }
 
-  decrementQuantity(item: any) {
-    if (item.quantity > 0) {
-      item.quantity--;
-      this.updateCartItems(item);
-      this.calculateTotalAmount();
+  incrementQuantity(index: number) {
+    this.cartItems[index].quantity++;
+  }
+
+  decrementQuantity(index: number) {
+    this.cartItems[index].quantity--;
+    if (this.cartItems[index].quantity === 0) {
+      this.removeItem(index);
     }
-    this.fetchCart();
-  }
-
-  updateCartItems(item: any) {
-    debugger;
-    const index = this.cartItems.findIndex((i: any) => i.id === item.id);
-    this.cartItems[index] = item;
-    localStorage.setItem('products', JSON.stringify(this.cartItems));
-  }
-
-  fetchCart() {
-    this.cartItems = JSON.parse(localStorage.getItem('products') || '[]');
   }
 }

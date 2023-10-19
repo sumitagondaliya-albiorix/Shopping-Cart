@@ -13,11 +13,12 @@ export class CartService {
   addItem(item: any) {
     this.cartItems.push(item);
   }
+  
   removeItem(index: number) {
     this.cartItems.splice(index, 1);
   }
 
-  getCartItemCount(): any {
+  get getCartItemCount(): any {
     return this.cartItems.length;
   }
 
@@ -27,6 +28,5 @@ export class CartService {
       (total, item) => total + item.price * item.quantity,
       0
     );
-    localStorage.setItem('products', JSON.stringify(this.products));
   }
 }

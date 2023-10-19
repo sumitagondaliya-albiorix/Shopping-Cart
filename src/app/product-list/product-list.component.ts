@@ -17,31 +17,33 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(localStorage.getItem('products'));
-    if (!localStorage.getItem('products')) {
-      this.getProducts();
-    } else {
-      this.products = JSON.parse(localStorage.getItem('products') || '[]');
-    }
+    this.getProducts();
   }
 
   getProducts() {
     this.productService.loadProducts().subscribe((response: any) => {
       this.products = response.products;
-      console.log(this.products);
-      this.products.forEach((item: any) => {
-        item.quantity = 0;
+      this.products.map((product) => {
+        product.quantity = 0;
+        const matchIndex = this.cartService.cartItems.findIndex((cart) => {
+          console.log('cart.id', cart.id);
+          console.log('product.id', product.id);
+
+          return product.id == cart.id;
+        });
+        if (matchIndex !== -1) {
+          product.quantity = this.cartService.cartItems[matchIndex].quantity;
+        }
       });
-      localStorage.setItem('products', JSON.stringify(this.products));
     });
   }
+
   addToCart(product: any) {
     const match = this.products.findIndex((item) => item.id === product.id);
     if (match !== -1) {
       product.quantity++;
       this.products[match] = product;
       this.cartService.addItem(product);
-      localStorage.setItem('products', JSON.stringify(this.products));
     }
   }
 
@@ -50,8 +52,6 @@ export class ProductListComponent implements OnInit {
     if (match !== -1) {
       action ? product.quantity++ : product.quantity--;
       this.products[match] = product;
-      this.cartService.addItem(product);
-      localStorage.setItem('products', JSON.stringify(this.products));
     }
   }
 }
