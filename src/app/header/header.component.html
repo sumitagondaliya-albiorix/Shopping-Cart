@@ -1,0 +1,11 @@
+<header class="header">
+  <div class="logo">
+    <a routerLink="/">My E-store</a>
+  </div>
+  <div class="cart-icon">
+    <a routerLink="/cart">
+      <i class="fa fa-shopping-cart"></i>
+      <span class="badge">{{cartService.getCartItemCount}}</span>
+    </a>
+  </div>
+</header>
