@@ -2,10 +2,18 @@
   <div class="logo">
     <a routerLink="/">My E-store</a>
   </div>
+  <nav>
+    <ul>
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/signup">Signup</a></li>
+    </ul>
+  </nav>
   <div class="cart-icon">
     <a routerLink="/cart">
       <i class="fa fa-shopping-cart"></i>
       <span class="badge">{{cartService.getCartItemCount}}</span>
     </a>
+    
+
   </div>
 </header>

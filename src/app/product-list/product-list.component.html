@@ -1,6 +1,5 @@
-<div class="product-box">
-  <section class="products">
-    <div class="product-card" *ngFor="let product of products;" class="product">
+<section class="products">
+    <div *ngFor="let product of products;" class="product">
       <div class="product-image">
         <img [src]="product.images[0]" alt="{{ product.title }}">
       </div>
@@ -17,12 +16,11 @@
               Cart</button>
             <span *ngIf="product.quantity">
               <button *ngIf="product.quantity" (click)="IncDec(false,product)" style="margin-top: 20px;">-</button>
-              <span  style="padding: 10px" >{{ product.quantity }}</span>
+              <span style="padding: 10px">{{ product.quantity }}</span>
               <button *ngIf="product.quantity" (click)="IncDec(true,product)" style="margin-top: 20px;">+</button>
             </span>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   </section>
-</div>

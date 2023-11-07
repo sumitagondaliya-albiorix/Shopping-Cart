@@ -1,19 +1,22 @@
 <div class="container">
   <div class="product-info">
-
     <div *ngIf="cartItems.length">
       <h2>Cart</h2>
       <p>Total Amount: Rs.{{cartService.getTotalAmount()}}</p>
       <ng-container *ngFor="let item of cartItems; let i = index">
         <div class="cart-item">
+          <div class="product-image">
+            <img [src]="item.images[0]" alt="{{ item.title }}">
+          </div>
           <h3>{{item.title }}</h3>
           <p>Price: Rs.{{item.price }}</p>
-          <p>Quantity: <button (click)="decrementQuantity(i)">-</button> {{ item.quantity }}
+          <p>Quantity: <button (click)="decrementQuantity(i)">-</button> {{item.quantity}}
             <button (click)="incrementQuantity(i)">+</button>
             <button (click)="removeItem(i)">Delete</button>
         </div>
-      </ng-container>
+      </ng-container> 
     </div>
     <h2 *ngIf="!cartItems.length">Cart is Empty</h2>
+    <!--if else in angular  html -->
   </div>
 </div>

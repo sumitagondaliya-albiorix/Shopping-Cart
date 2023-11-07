@@ -26,9 +26,6 @@ export class ProductListComponent implements OnInit {
       this.products.map((product) => {
         product.quantity = 0;
         const matchIndex = this.cartService.cartItems.findIndex((cart) => {
-          console.log('cart.id', cart.id);
-          console.log('product.id', product.id);
-
           return product.id == cart.id;
         });
         if (matchIndex !== -1) {

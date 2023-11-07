@@ -9,7 +9,6 @@ import { Product } from '../models/product.model';
 })
 export class CartComponent {
   totalAmount = 0;
-
   cartItems: Product[]= [];
 
   constructor(public cartService: CartService) {
