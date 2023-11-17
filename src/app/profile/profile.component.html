@@ -1,0 +1,39 @@
+<div class="profile">
+  <div class="profile-header">
+    <span class="edit-icon" (click)="toggleEdit()">Edit</span>
+    <!-- Logout button -->
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+  <div class="profile-image">
+    <img src="https://picsum.photos/200/300" alt="Lamp" >
+    
+  </div>
+  <div class="profile-details">
+    <div class="profile-info" *ngIf="!isEditEnabled">
+      <!-- Display user info -->
+      <h2>Profile Information</h2>
+      <p><strong>First Name:</strong> {{ firstName }}</p>
+      <p><strong>Last Name:</strong> {{ lastName }}</p>
+      <p><strong>Email:</strong> {{ email }}</p>
+    </div>
+    <div class="edit-profile" *ngIf="isEditEnabled">
+      <!-- Edit profile form -->
+      <h2>Edit Profile</h2>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="editFirstName">First Name</label>
+          <input type="text" id="editFirstName" formControlName="firstName" placeholder="Enter your first name">
+        </div>
+        <div class="form-group">
+          <label for="editLastName">Last Name</label>
+          <input type="text" id="editLastName" formControlName="lastName" placeholder="Enter your last name">
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" formControlName="email" placeholder="Enter your email">
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

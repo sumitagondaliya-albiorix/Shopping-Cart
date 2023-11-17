@@ -7,13 +7,16 @@ import { CartService } from '../Service/cart.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  cartItemCount: any = 1;
   constructor(public cartService: CartService) {}
 
-  ngOnInit(): any {
-    this.cartService.getCartItemCount().subscribe((response: any) => {
-      this.cartItemCount = response;
-      // console.log('response: ', response);
-    });
+  /**
+   * Checks if the user is logged in based on localStorage.
+   *
+   * @return {boolean} - Returns true if user data exists, false otherwise.
+   */
+  isLoggedIn(): boolean {
+    // Check if the user is logged in based on localStorage
+    const userData = localStorage.getItem('userProfile');
+    return !!userData; // Return true if user data exists, false otherwise
   }
 }

@@ -6,4 +6,7 @@ export interface Product {
   price: number;
   title: string;
   quantity: number;
+  thumbnail: string;
+  brand:string;
+  rating: number;
 }

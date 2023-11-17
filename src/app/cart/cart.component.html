@@ -1,22 +1,27 @@
 <div class="container">
-  <div class="product-info">
+  <div class="cart-info">
     <div *ngIf="cartItems.length">
-      <h2>Cart</h2>
-      <p>Total Amount: Rs.{{cartService.getTotalAmount()}}</p>
-      <ng-container *ngFor="let item of cartItems; let i = index">
-        <div class="cart-item">
+      <h2>Your Cart</h2>
+      <p class="total-amount">Total Amount: Rs.{{ cartService.getTotalAmount() }}</p>
+      <div class="cart-items">
+        <div *ngFor="let item of cartItems; let i = index" class="cart-item">
           <div class="product-image">
-            <img [src]="item.images[0]" alt="{{ item.title }}">
+            <img [src]="item.thumbnail" alt="{{ item.title }}">
           </div>
-          <h3>{{item.title }}</h3>
-          <p>Price: Rs.{{item.price }}</p>
-          <p>Quantity: <button (click)="decrementQuantity(i)">-</button> {{item.quantity}}
-            <button (click)="incrementQuantity(i)">+</button>
-            <button (click)="removeItem(i)">Delete</button>
+          <div class="product-details">
+            <h3>{{ item.title }}</h3>
+            <p class="price">Price: Rs.{{ item.price }}</p>
+            <div class="quantity-controls">
+              <p>Quantity:</p>
+              <button (click)="decrementQuantity(i)">-</button>
+              <span>{{ item.quantity }}</span>
+              <button (click)="incrementQuantity(i)">+</button>
+              <button class="delete-btn" (click)="removeItem(i)">Delete</button>
+            </div>
+          </div>
         </div>
-      </ng-container> 
+      </div>
     </div>
-    <h2 *ngIf="!cartItems.length">Cart is Empty</h2>
-    <!--if else in angular  html -->
+    <h2 *ngIf="!cartItems.length" class="empty-cart">Your Cart is Empty</h2>
   </div>
 </div>

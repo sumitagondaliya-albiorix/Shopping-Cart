@@ -1,38 +1,63 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent {
-  signup(signupForm: any) {
-    // Get form values
-    const firstName = signupForm.firstName;
-    const lastName = signupForm.lastName;
-    const email = signupForm.email;
-    const password = signupForm.password;
-    const confirmPassword = signupForm.confirmPassword;
+  firstName: string = '';
+  lastName: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  signupMessage: string = '';
 
-    // Validate password and confirm password
+  constructor(private router: Router) {}
+
+  /**
+   * Registers a new user.
+   *
+   * @param {any} signupForm - the signup form data
+   * @return {void} the function does not return anything
+   */
+  register(signupForm: any): void {
+    const { firstName, lastName, email, password, confirmPassword } =
+      signupForm.value;
+
     if (password !== confirmPassword) {
-      alert('Password and confirm password do not match.');
+      this.signupMessage = 'Passwords do not match. Please re-enter.';
       return;
     }
-    // Save user data to local storage
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    storedUsers.push({ firstName, lastName, email, password });
-    localStorage.setItem('users', JSON.stringify(storedUsers));
-    alert('Signup successful');
+
+    const newUser: User = { firstName, lastName, email, password };
+
+    const storedUsers: User[] = JSON.parse(
+      localStorage.getItem('users') || '[]'
+    );
+    const existingUser = storedUsers.find(
+      (user: User) => user.email === newUser.email
+    );
+
+    if (existingUser) {
+      this.signupMessage =
+        'Email address already exists. Please use another one.';
+    } else {
+      storedUsers.push(newUser);
+      localStorage.setItem('users', JSON.stringify(storedUsers));
+      localStorage.setItem('userProfile', JSON.stringify(newUser));
+      this.signupMessage = 'Registration successful!';
+
+      // Optionally, you can navigate to a login page after successful signup
+      this.router.navigate(['/products']);
+    }
   }
 }
-
-
-
-
-
- 
-  
-
-    
-
