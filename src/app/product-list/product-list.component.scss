@@ -7,14 +7,30 @@
   .product {
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 20px;
     background-color: #fff;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
+    width: calc(15% - 0px);
+    margin: 10px;
+
+    @media (max-width: 1200px) {
+      width: calc(
+        25% - 30px
+      ); /* For smaller screens, show 3 products in a row */
+    }
+
+    @media (max-width: 768px) {
+      width: calc(25% - 20px); /* For tablets, show 2 products in a row */
+    }
+
+    @media (max-width: 512px) {
+      width: 100%; /* For mobile devices, show 1 product in a row */
+    }
+
     .product-image {
       width: 100%;
-      max-height: 200px;
+      height: 200px;
       overflow: hidden;
 
       img {
@@ -70,8 +86,8 @@
           }
         }
 
-        .add-btn{
-          margin-left: 8px
+        .add-btn {
+          margin-left: 8px;
         }
       }
     }
