@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
-  isEditEnabled: boolean = false;
+  isEditEnabled: false;
   userData: any;
 
   constructor(private fb: FormBuilder, private router: Router) {}

@@ -35,7 +35,7 @@ export class CartComponent {
    * @param {number} index - The index of the cart item to increment.
    * @return {void} This function does not return a value.
    */
-  incrementQuantity(index: number) {
+  incrementQuantity(index: number): void {
     this.cartItems[index].quantity++;
     const storedUsers= JSON.parse(localStorage.getItem('users') || '[]');
     const currentUser = JSON.parse(localStorage.getItem('userProfile') || '{}');

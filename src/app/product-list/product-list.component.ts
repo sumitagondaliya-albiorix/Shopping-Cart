@@ -34,10 +34,6 @@ export class ProductListComponent implements OnInit {
   /**
    * Retrieves the products by calling the loadProducts method of the productService.
    * For each product, it retrieves the corresponding cartItem from the cartService and sets the quantity property of the product based on the cartItem's quantity.
-   *
-   * There are no parameters.
-   *
-   * There is no return value.
    */
   getProducts() {
     this.productService.loadProducts().subscribe((response: any) => {
@@ -50,8 +46,8 @@ export class ProductListComponent implements OnInit {
   }
 
   /**
-   * Adds a product to the cart. If the product is already in the cart, 
-   * the quantity is incremented. If the product is not in the cart, 
+   * Adds a product to the cart. If the product is already in the cart,
+   * the quantity is incremented. If the product is not in the cart,
    * a new cart item is created with a quantity of 1.
    *
    * @param {Product} product - The product to be added to the cart.
@@ -62,7 +58,7 @@ export class ProductListComponent implements OnInit {
       cartItem.quantity++;
       this.cartService.updateCartItem(cartItem);
     } else {
-      this.cartService.addItem({ ...product, quantity: 1 });
+      this.cartService.addCartItem({ ...product, quantity: 1 });
     }
     product.quantity++;
   }
@@ -77,27 +73,28 @@ export class ProductListComponent implements OnInit {
     const cartItem = this.cartService.getCartItem(product.id);
     if (cartItem) {
       action ? cartItem.quantity++ : cartItem.quantity--;
-      
+
       if (cartItem.quantity === 0) {
         const index = this.cartService.cartItems.findIndex(
           (item) => item.id === cartItem.id
-        )
+        );
 
-        this.cartService.removeItem(index);
+        this.cartService.removeCartItem(index);
       } else {
         this.cartService.updateCartItem(cartItem);
       }
     }
     action ? product.quantity++ : product.quantity--;
   }
-    /**
-     * Calculates the discounted price of a product.
-     *
-     * @param {any} product - The product object.
-     * @return {number} The discounted price of the product.
-     */
-    calculateDiscountedPrice(product: any) {
-    let discountedPrice = product.price - (product.price * product.discountPercentage) / 100;
+  /**
+   * Calculates the discounted price of a product.
+   *
+   * @param {any} product - The product object.
+   * @return {number} The discounted price of the product.
+   */
+  calculateDiscountedPrice(product: any) {
+    let discountedPrice =
+      product.price - (product.price * product.discountPercentage) / 100;
     return Math.round(discountedPrice * 100) / 100;
   }
 

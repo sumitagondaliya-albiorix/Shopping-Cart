@@ -15,7 +15,7 @@ export class CartService {
   /**
    * Updates a cart item in the cartItems array.
    *
-   * @param {Product} updatedItem - The updated item to be added to the cartItems array.
+   * @param {Product} updatedItem - The updated cart item to be added to the cartItems array.
    * @return {void} This function does not return anything.
    */
   updateCartItem(updatedItem: Product): void {
@@ -32,7 +32,7 @@ export class CartService {
    * @param {Product} item - The item to be added to the cart.
    * @return {void} - This function doesn't return anything.
    */
-  addItem(item: Product): void {
+  addCartItem(item: Product): void {
     this.cartItems.push(item);
     this.updateUserCartItems();
   }
@@ -43,7 +43,7 @@ export class CartService {
    * @param {number} index - The index of the item to remove.
    * @return {void} This function does not return anything.
    */
-  removeItem(index: number): void {
+  removeCartItem(index: number): void {
     this.cartItems.splice(index, 1);
     this.updateUserCartItems();
   }
