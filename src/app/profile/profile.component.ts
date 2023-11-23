@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
-  isEditEnabled: false;
+  isEditEnabled: Boolean = false;
   userData: any;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private formbuilder: FormBuilder, private router: Router) {}
 
   /**
    * Initializes the component and calls the necessary functions to set up the form and load user data.
@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
    * @return {void}
    */
   initForm(): void {
-    this.profileForm = this.fb.group({
+    this.profileForm = this.formbuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

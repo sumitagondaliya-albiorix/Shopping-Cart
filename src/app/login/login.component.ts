@@ -9,7 +9,7 @@ interface User {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   username: string = '';
@@ -28,8 +28,12 @@ export class LoginComponent {
     const username = loginForm?.form?.value?.username;
     const password = loginForm?.form?.value?.password;
 
-    const storedUsers: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = storedUsers.find((u: User) => u.email === username && u.password === password);
+    const storedUsers: User[] = JSON.parse(
+      localStorage.getItem('users') || '[]'
+    );
+    const user = storedUsers.find(
+      (u: User) => u.email === username && u.password === password
+    );
 
     if (user) {
       this.loginMessage = 'Login successful';

@@ -4,27 +4,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { CartComponent } from './cart/cart.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CartComponent,
-    ProductListComponent,
+    ProfileComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
   ],
-  imports:[
-    BrowserModule,AppRoutingModule,FormsModule,HttpClientModule,ReactiveFormsModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
