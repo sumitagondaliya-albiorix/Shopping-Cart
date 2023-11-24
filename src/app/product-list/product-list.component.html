@@ -1,0 +1,22 @@
+<section class="products">
+  <div *ngFor="let product of products;" class="product">
+    <div class="product-image">
+      <img [src]="product?.thumbnail" alt="{{ product.title }}">
+    </div>
+    <div class="product-details">
+      <h3 class="product-title">{{ product.title }}</h3>
+      <p class="price">Price: Rs.{{ product.price }}</p>
+      <p class="discounted-price">Discounted Price: ${{ calculateDiscountedPrice(product) }}</p>
+      <p class="rating">Rating: {{ product.rating }}</p>
+      <p class="brand">Brand: {{ product.brand }}</p>
+      <div *ngIf="!product.quantity && isUserLoggedIn()" class="add-to-cart">
+        <button (click)="addToCart(product)">Add to Cart</button>
+      </div>
+      <div *ngIf="product.quantity" class="quantity-controls">
+        <button (click)="IncDec(false, product)">-</button>
+        <span>{{ product.quantity }}</span>
+        <button class="add-btn" (click)="IncDec(true, product)">+</button>
+      </div>
+    </div>
+  </div>
+</section>
