@@ -7,6 +7,9 @@ import { Product } from '../models/product.model';
   providedIn: 'root',
 })
 export class ProductService {
+  getProducts() {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) {}
 /**
  * Load products from the API.

@@ -2,14 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../Service/product.service';
 import { CartService } from '../Service/cart.service';
 import { Product } from '../models/product.model';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../store/cart.actions';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
+  template: `
+    <div *ngFor="let product of products">
+      {{ product.name }}
+      <button (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  `,
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  Products = this.productService.getProducts();
 
   /**
    * Constructor for the class.
@@ -19,7 +28,8 @@ export class ProductListComponent implements OnInit {
    */
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private store: Store
   ) {}
 
   /**
@@ -61,6 +71,7 @@ export class ProductListComponent implements OnInit {
       this.cartService.addCartItem({ ...product, quantity: 1 });
     }
     product.quantity++;
+    this.store.dispatch(addToCart({ product }));
   }
 
   /**

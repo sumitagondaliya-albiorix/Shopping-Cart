@@ -11,6 +11,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ProductListComponent } from './product-list/product-list.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],
