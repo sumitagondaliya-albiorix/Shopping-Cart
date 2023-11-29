@@ -10,3 +10,12 @@ export interface Product {
   brand:string;
   rating: number;
 }
+
+
+export interface ProductResponse {
+  products: Product[]
+  total: number
+  skip: number
+  limit: number
+}
+

@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
   private users: User[] = [];
+  router: any;
 
   /**
 +   * Constructs a new instance of the class.
@@ -63,5 +64,15 @@ export class UserService {
   private saveUsers() {
     localStorage.setItem('users', JSON.stringify(this.users));
   }
-}
 
+  getUserProfile(): string | null {
+    return localStorage.getItem('userProfile');
+  }
+
+  logout(): void {
+    localStorage.removeItem('userProfile');
+    this.router.navigate(['/login']);
+  }
+
+
+}

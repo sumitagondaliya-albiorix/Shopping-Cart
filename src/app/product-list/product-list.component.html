@@ -14,7 +14,7 @@
       </div>
       <div *ngIf="product.quantity" class="quantity-controls">
         <button (click)="IncDec(false, product)">-</button>
-        <span>{{ product.quantity }}</span>
+        <span>{{ product?.quantity }}</span>
         <button class="add-btn" (click)="IncDec(true, product)">+</button>
       </div>
     </div>

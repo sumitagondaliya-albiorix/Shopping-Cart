@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../Service/product.service';
-import { CartService } from '../Service/cart.service';
+import { ProductService } from '../service/product.service';
+import { CartService } from '../service/cart.service';
 import { Product } from '../models/product.model';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../store/cart.actions';
+import { UserService } from '../service/user.service';
+import { ArrayType } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-list',
@@ -18,7 +20,7 @@ import { addToCart } from '../store/cart.actions';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  Products = this.productService.getProducts();
+  // Products = this.productService.getProducts();
 
   /**
    * Constructor for the class.
@@ -29,7 +31,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private store: Store
+    private store: Store,
+    private userService: UserService
   ) {}
 
   /**
@@ -46,7 +49,7 @@ export class ProductListComponent implements OnInit {
    * For each product, it retrieves the corresponding cartItem from the cartService and sets the quantity property of the product based on the cartItem's quantity.
    */
   getProducts() {
-    this.productService.loadProducts().subscribe((response: any) => {
+    this.productService.loadProducts().subscribe((response) => {
       this.products = response.products;
       this.products.forEach((product) => {
         const cartItem = this.cartService.getCartItem(product.id);
@@ -82,6 +85,7 @@ export class ProductListComponent implements OnInit {
    */
   IncDec(action: boolean, product: Product) {
     const cartItem = this.cartService.getCartItem(product.id);
+
     if (cartItem) {
       action ? cartItem.quantity++ : cartItem.quantity--;
 
@@ -95,7 +99,7 @@ export class ProductListComponent implements OnInit {
         this.cartService.updateCartItem(cartItem);
       }
     }
-    action ? product.quantity++ : product.quantity--;
+    this.getProducts();
   }
   /**
    * Calculates the discounted price of a product.
@@ -103,9 +107,12 @@ export class ProductListComponent implements OnInit {
    * @param {any} product - The product object.
    * @return {number} The discounted price of the product.
    */
-  calculateDiscountedPrice(product: any) {
+  calculateDiscountedPrice(response: {
+    price: number;
+    discountPercentage: number;
+  }) {
     let discountedPrice =
-      product.price - (product.price * product.discountPercentage) / 100;
+      response.price - (response.price * response.discountPercentage) / 100;
     return Math.round(discountedPrice * 100) / 100;
   }
 
@@ -115,6 +122,6 @@ export class ProductListComponent implements OnInit {
    * @return {boolean} Returns true if the user is logged in, false otherwise.
    */
   isUserLoggedIn(): boolean {
-    return !!localStorage.getItem('userProfile');
+    return !!this.userService.getUserProfile();
   }
 }

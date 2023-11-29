@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UntypedFormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 interface User {
@@ -21,12 +22,11 @@ export class LoginComponent {
   /**
    * Logs in a user using the provided login form.
    *
-   * @param {any} loginForm - The login form data.
    * @return {void} This function does not return anything.
    */
-  login(loginForm: any): void {
-    const username = loginForm?.form?.value?.username;
-    const password = loginForm?.form?.value?.password;
+  login(): void {
+    const username = this.username;
+    const password = this.password;
 
     const storedUsers: User[] = JSON.parse(
       localStorage.getItem('users') || '[]'

@@ -19,7 +19,9 @@ export class CartService {
    * @return {void} This function does not return anything.
    */
   updateCartItem(updatedItem: Product): void {
-    const index = this.cartItems.findIndex((item) => item.id === updatedItem.id);
+    const index = this.cartItems.findIndex(
+      (item) => item.id === updatedItem.id
+    );
     if (index !== -1) {
       this.cartItems[index] = updatedItem;
       this.updateUserCartItems();
@@ -73,7 +75,10 @@ export class CartService {
    * @return {number} The total amount of the cart items.
    */
   getTotalAmount(): number {
-    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return this.cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   }
 
   /**
@@ -85,5 +90,56 @@ export class CartService {
     const updatedUser = { ...currentUser, cartItems: this.cartItems };
     localStorage.setItem('userProfile', JSON.stringify(updatedUser));
   }
-}
 
+  incrementQuantity(index: number): void {
+    this.cartItems[index].quantity++;
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const currentUser = JSON.parse(localStorage.getItem('userProfile') || '{}');
+
+    let newArray = storedUsers.map((user: any) => {
+      if (user.email === currentUser.email) {
+        return {
+          ...user,
+          cartItems: this.cartItems,
+        };
+      }
+      return user;
+    });
+
+    localStorage.setItem('users', JSON.stringify(newArray));
+    localStorage.setItem(
+      'userProfile',
+      JSON.stringify({ ...currentUser, cartItems: this.cartItems })
+    );
+  }
+
+  decrementQuantity(index: number) {
+    this.cartItems[index].quantity--;
+    if (this.cartItems[index].quantity === 0) {
+      this.removeItem(index);
+    }
+
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const currentUser = JSON.parse(localStorage.getItem('userProfile') || '{}');
+
+    let newArray = storedUsers.map((user: any) => {
+      if (user.email === currentUser.email) {
+        return {
+          ...user,
+          cartItems: this.cartItems,
+        };
+      }
+      return user;
+    });
+
+    localStorage.setItem('users', JSON.stringify(newArray));
+    localStorage.setItem(
+      'userProfile',
+      JSON.stringify({ ...currentUser, cartItems: this.cartItems })
+    );
+  }
+
+  removeItem(index: number) {
+    this.cartItems.splice(index, 1);
+  }
+}

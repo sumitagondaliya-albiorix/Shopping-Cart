@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { SignupComponent } from './Auth/signup/signup.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -20,9 +20,7 @@ import { EffectsModule } from '@ngrx/effects';
     HeaderComponent,
     CartComponent,
     ProfileComponent,
-    LoginComponent,
-    SignupComponent,
-    ProductListComponent
+    ProductListComponent,
   ],
   imports: [
     BrowserModule,

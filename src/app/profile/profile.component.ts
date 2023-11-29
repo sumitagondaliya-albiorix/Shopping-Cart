@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  [x: string]: any;
   profileForm!: FormGroup;
   isEditEnabled: Boolean = false;
   userData: any;
@@ -64,11 +65,8 @@ export class ProfileComponent implements OnInit {
   toggleEdit(): void {
     this.isEditEnabled = !this.isEditEnabled;
     if (this.isEditEnabled) {
-      this.profileForm.patchValue({
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-      });
+      const { firstName, lastName, email } = this;
+      this.profileForm.patchValue({ firstName, lastName, email });
     }
   }
 
@@ -111,10 +109,6 @@ export class ProfileComponent implements OnInit {
    *
    * @return {void} No return value.
    */
-  logout(): void {
-    localStorage.removeItem('userProfile');
-    this.router.navigate(['/login']);
-  }
 
   /**
    * Retrieves the value of the firstName control from the profileForm.

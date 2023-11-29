@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CartService } from '../Service/cart.service';
+import { CartService } from '../service/cart.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,10 @@ import { CartService } from '../Service/cart.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(public cartService: CartService) {}
+  constructor(
+    public cartService: CartService,
+    private userService: UserService
+  ) {}
 
   /**
    * Checks if the user is logged in based on localStorage.
@@ -15,8 +19,6 @@ export class HeaderComponent {
    * @return {boolean} - Returns true if user data exists, false otherwise.
    */
   isLoggedIn(): boolean {
-    // Check if the user is logged in based on localStorage
-    const userData = localStorage.getItem('userProfile');
-    return !!userData; // Return true if user data exists, false otherwise
+    return !!this.userService.getUserProfile(); 
   }
 }
