@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { Product, ProductResponse } from '../models/product.model';
+import { ProductResponse } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,10 @@ import { Product, ProductResponse } from '../models/product.model';
  * @return {type} description of return value
  */
 export class ProductService {
-  // getProducts() {
-  //   throw new Error('Method not implemented.');
-  // }
+  getProducts() {
+      throw new Error('Method not implemented.');
+  }
+
   constructor(private http: HttpClient) {}
   /**
    * Load products from the API.

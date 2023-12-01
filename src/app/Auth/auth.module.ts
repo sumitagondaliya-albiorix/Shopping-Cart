@@ -6,8 +6,6 @@ import { SignupComponent } from 'src/app/Auth/signup/signup.component';
 import { LoginComponent } from 'src/app/Auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [SignupComponent, LoginComponent],
@@ -17,8 +15,6 @@ import { StoreModule } from '@ngrx/store';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // StoreModule.forRoot({}, {}),
-    // EffectsModule.forRoot([]),
   ],
 })
 export class AuthModule {}

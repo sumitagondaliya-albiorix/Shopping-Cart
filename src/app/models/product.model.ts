@@ -7,15 +7,14 @@ export interface Product {
   title: string;
   quantity: number;
   thumbnail: string;
-  brand:string;
+  brand: string;
   rating: number;
+  discountPercentage: number;
 }
-
 
 export interface ProductResponse {
-  products: Product[]
-  total: number
-  skip: number
-  limit: number
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
 }
-

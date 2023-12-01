@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,11 @@ export class ProfileComponent implements OnInit {
   isEditEnabled: Boolean = false;
   userData: any;
 
-  constructor(private formbuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formbuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   /**
    * Initializes the component and calls the necessary functions to set up the form and load user data.
@@ -138,5 +143,9 @@ export class ProfileComponent implements OnInit {
   get email(): string {
     const emailControl = this.profileForm.get('email');
     return emailControl ? emailControl.value : '';
+  }
+
+  logout(): void {
+    this.userService.logout();
   }
 }

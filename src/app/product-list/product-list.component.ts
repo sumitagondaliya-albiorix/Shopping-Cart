@@ -1,27 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { Product } from '../models/product.model';
-import { Store } from '@ngrx/store';
-import { addToCart } from '../store/cart.actions';
 import { UserService } from '../service/user.service';
-import { ArrayType } from '@angular/compiler';
+import { ProductActions } from '/../store/productAPI.actions.ts';
+
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  template: `
-    <div *ngFor="let product of products">
-      {{ product.name }}
-      <button (click)="addToCart(product)">Add to Cart</button>
-    </div>
-  `,
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  // Products = this.productService.getProducts();
-
   /**
    * Constructor for the class.
    *
@@ -31,7 +23,6 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private store: Store,
     private userService: UserService
   ) {}
 
@@ -41,6 +32,18 @@ export class ProductListComponent implements OnInit {
    * @returns {void} - This function does not return anything.
    */
   ngOnInit() {
+    {
+      this.store.pipe(select('products', 'products')).subscribe((products) => {
+        this.products = products;
+      });
+  
+      this.store.pipe(select('products', 'loading')).subscribe((loading) => {
+        this.loading = loading;
+      });
+  
+      this.store.pipe(select('products', 'error')).subscribe((error) => {
+        this.error = error;
+      }
     this.getProducts();
   }
 
@@ -74,7 +77,6 @@ export class ProductListComponent implements OnInit {
       this.cartService.addCartItem({ ...product, quantity: 1 });
     }
     product.quantity++;
-    this.store.dispatch(addToCart({ product }));
   }
 
   /**
@@ -107,12 +109,9 @@ export class ProductListComponent implements OnInit {
    * @param {any} product - The product object.
    * @return {number} The discounted price of the product.
    */
-  calculateDiscountedPrice(response: {
-    price: number;
-    discountPercentage: number;
-  }) {
+  calculateDiscountedPrice(product: Product) {
     let discountedPrice =
-      response.price - (response.price * response.discountPercentage) / 100;
+      product.price - (product.price * product.discountPercentage) / 100;
     return Math.round(discountedPrice * 100) / 100;
   }
 
@@ -125,3 +124,32 @@ export class ProductListComponent implements OnInit {
     return !!this.userService.getUserProfile();
   }
 }
+
+
+/*
+
+@Component({
+  selector: 'app-product',
+  template: `
+    <div *ngIf="products.length > 0">
+      </div>
+
+    <button *ngIf="!products.length && !loading" (click)="loadProducts()">
+      Load Products
+    </button>
+
+    <div *ngIf="loading">Loading...</div>
+    <div *ngIf="error">{{ error }}</div>
+  `,
+})
+export class ProductComponent implements OnInit {
+  products: Product[] | undefined;
+  loading = false;
+  error: string | null = null;
+
+  constructor(private store: Store, private productActions: ProductActions) {}
+
+  ngOnInit() );
+
+
+*/
