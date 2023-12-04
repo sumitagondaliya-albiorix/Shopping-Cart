@@ -11,7 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { ProductEffects } from './effects/product-effects';
+import { ProductEffects } from './store/product.effects';
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './store/product.reducer';
 

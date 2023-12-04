@@ -1,6 +1,3 @@
-// export const selectProducts = (state: ProductState) => state.products;
-// export const selectLoading = (state: ProductState) => state.loading;
-// export const selectError = (state: ProductState) => state.error;
 import { createReducer, on } from '@ngrx/store';
 import { ProductActions } from './store/productAPI.actions.ts';
 import { Product } from '../models/product';

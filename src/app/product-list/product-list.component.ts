@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select } from '@ngrx/store';
 import { ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { Product } from '../models/product.model';
 import { UserService } from '../service/user.service';
-import { ProductActions } from '/../store/productAPI.actions.ts';
 
 
 @Component({
